@@ -1,7 +1,7 @@
-from src.lectura import Lectura
-from src.algorithim import RandomForestStrategy
-from src.detectorIncidencia import DetectorIncidencia
-from moduloVisualizacion import ConsoleLogger, Visualizar
+from src.Lectura import Lectura
+from src.Algorithim import RandomForestStrategy
+from src.DetectorIncidencia import DetectorIncidencia
+from ModuloVisualizacion import ConsoleLogger, Visualizar
 
 
 class SystemController:
