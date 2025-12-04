@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from abc import ABC, abstractmethod
 from datetime import datetime
+import os  # <--- Necesario para crear carpetas
 
 
 class Observer(ABC):
@@ -35,10 +36,9 @@ class Visualizar(Observer):
         plt.figure(figsize=(8, 6))
 
         # Etiquetas actualizadas al contexto de "Tipos de Incidencia"
-        # Asumiendo que 0 y 1 son los dos tipos que menciona el enunciado
         labels = ['Incidencia Tipo 0', 'Incidencia Tipo 1']
 
-        sns.heatmap(matrix, annot=True, fmt='d', cmap='Reds',  # Cambio a Rojo (alerta/incidencia)
+        sns.heatmap(matrix, annot=True, fmt='d', cmap='Reds',
                     xticklabels=labels,
                     yticklabels=labels)
 
@@ -47,6 +47,22 @@ class Visualizar(Observer):
         plt.xlabel('Tipo Predicho por el Modelo')
 
         plt.tight_layout()
-        plt.savefig('resultado_incidencias.png')
-        print(f"[Visualización] Gráfica guardada como 'resultado_incidencias.png'")
+
+        # --- CORRECCIÓN DEL ERROR ---
+        # 1. Definir nombre de la carpeta (sin barra al principio para que sea relativa)
+        folder_name = 'Images'
+
+        # 2. Crear la carpeta si no existe
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
+            print(f"[Sistema] Carpeta '{folder_name}' creada.")
+
+        # 3. Construir la ruta de forma segura para cualquier sistema operativo
+        filepath = os.path.join(folder_name, 'resultado_incidencias.png')
+
+        # 4. Guardar
+        plt.savefig(filepath)
+        print(f"[Visualización] Gráfica guardada correctamente en: {filepath}")
+
+        # Mostrar ventana (bloqueante, cerrar para continuar si es necesario)
         plt.show()

@@ -28,19 +28,3 @@ class RandomForestStrategy(MLStrategy):
 
     def predict(self, X):
         return self.model.predict(X)
-
-class SVMStrategy(MLStrategy):
-    """
-    Opción B: Support Vector Machine.
-    Algoritmo alternativo para comparar y cumplir el requisito de 'Selección'.
-    """
-    def __init__(self):
-        # Kernel 'rbf' es estándar para datos complejos
-        self.model = SVC(kernel='rbf', random_state=42)
-
-    def train(self, X, y):
-        print("[Modelo SVM] Entrenando Support Vector Machine...")
-        self.model.fit(X, y)
-
-    def predict(self, X):
-        return self.model.predict(X)
