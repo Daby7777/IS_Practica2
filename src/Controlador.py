@@ -38,7 +38,7 @@ class Controlador:
         if self.df is None:
             return
         generator = np.random.default_rng(42)
-        df_train, df_test = train_test_split(self.df, test_size=0.20, shuffle=False)
+        df_train, df_test = train_test_split(self.df, test_size=0.20, shuffle=False, random_state=generator)
 
         print("Sistema: Entrenando IA...")
         X_test, y_test = self.detector.entrenar(df_train, df_test)
